@@ -9,5 +9,7 @@ cask "codex" do
 
   depends_on cask: "chatgpt"
 
-  binary "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex"
+  executable = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex"
+  binary executable
+  generate_completions_from_executable executable, "completion"
 end

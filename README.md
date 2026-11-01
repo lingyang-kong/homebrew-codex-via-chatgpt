@@ -20,6 +20,13 @@ ChatGPT updates also update the CLI. The source is `file:///dev/null`, staged
 as an uncompressed empty file to satisfy Homebrew's source requirement.
 No server or network download is needed for this cask's source.
 
+Homebrew generates Bash, Zsh, and Fish completions during installation and
+removes them when uninstalling Codex. After a ChatGPT update, regenerate them with:
+
+```sh
+brew reinstall --cask lingyang-kong/codex/codex
+```
+
 `brew remove chatgpt` refuses removal while this cask is installed. Remove Codex
 first, or explicitly remove both:
 
