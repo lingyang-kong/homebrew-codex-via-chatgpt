@@ -16,16 +16,16 @@ $HOMEBREW_PREFIX/bin/codex -> /Applications/ChatGPT.app/Contents/Resources/codex
 ```
 
 ChatGPT must be installed in `/Applications` and include the bundled CLI.
-ChatGPT updates also update the CLI. The source is `file:///dev/null`, staged
-as an uncompressed empty file to satisfy Homebrew's source requirement.
-No server or network download is needed for this cask's source.
+ChatGPT updates also update the CLI. The source is `file:///dev/null`; no
+additional download is needed. Completion loaders are linked directly from
+the local tap repository.
 
-Homebrew generates Bash, Zsh, and Fish completions during installation and
-removes them when uninstalling Codex. After a ChatGPT update, regenerate them with:
-
-```sh
-brew reinstall --cask lingyang-kong/codex/codex
-```
+Homebrew installs lazy completion loaders for Bash, Zsh, and Fish and removes
+them when uninstalling Codex. They generate completions from the current CLI
+on first use in each shell. Open a new shell after a ChatGPT update to pick up
+its completions; reinstalling the cask is unnecessary. Bash requires its
+completion support to be enabled and Bash 4 or newer (macOS's bundled Bash 3.2
+is unsupported); Zsh requires `compinit`.
 
 `brew remove chatgpt` refuses removal while this cask is installed. Remove Codex
 first, or explicitly remove both:

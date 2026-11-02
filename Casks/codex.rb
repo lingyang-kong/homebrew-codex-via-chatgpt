@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 cask "codex" do
   version :latest
   sha256 :no_check
@@ -8,8 +10,11 @@ cask "codex" do
   homepage "https://github.com/lingyang-kong/homebrew-codex"
 
   depends_on cask: "chatgpt"
+  depends_on :macos
 
-  executable = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex"
-  binary executable
-  generate_completions_from_executable executable, "completion"
+  binary "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex"
+  completions = cask.tap.path / "completions"
+  %w[bash zsh fish].each do |shell|
+    public_send "#{shell}_completion", completions / "codex.#{shell}"
+  end
 end
